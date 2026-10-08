@@ -7517,4 +7517,53 @@ CONFIG_OPLUS_FEATURE_SCHED_EXT=y
 #
 # end of Rust hacking
 # end of Kernel hacking
+# Linux Random Number Generator (LRNG) - Optimal Config
+# ============================================================
+CONFIG_RANDOM_DEFAULT_IMPL=y
 CONFIG_LRNG=y
+CONFIG_LRNG_SHA256=y
+
+# ------------------------------------------------------------
+# LRNG Interfaces (Arayüzler)
+# /dev/urandom ve /dev/random çalışması için DEV_IF ŞARTTIR!
+# ------------------------------------------------------------
+CONFIG_LRNG_DEV_IF=y
+CONFIG_LRNG_HWRAND_IF=y
+# CONFIG_LRNG_KCAPI_IF is not set
+
+# ------------------------------------------------------------
+# Entropy Sources (Entropi Kaynakları)
+# Boot süresini hızlandırır, kilitlenmeleri önler.
+# ------------------------------------------------------------
+CONFIG_LRNG_CPU=y
+CONFIG_LRNG_CPU_FULL_ENT_MULTIPLIER=1
+CONFIG_LRNG_CPU_ENTROPY_RATE=8
+CONFIG_LRNG_SCHED=y
+CONFIG_LRNG_IRQ=y
+# CONFIG_LRNG_JENT is not set
+# CONFIG_LRNG_KERNEL_RNG is not set
+
+# Timer Cutoff Ayarları
+CONFIG_LRNG_RCT_CUTOFF=31
+CONFIG_LRNG_RCT_CUTOFF_PERMANENT=81
+CONFIG_LRNG_APT_CUTOFF=325
+CONFIG_LRNG_APT_CUTOFF_PERMANENT=371
+
+# ------------------------------------------------------------
+# DRNG & Algoritma Seçimi (En Hızlı: ChaCha20)
+# ------------------------------------------------------------
+CONFIG_LRNG_DRNG_CHACHA20=y
+CONFIG_LRNG_DFLT_DRNG_CHACHA20=y
+# CONFIG_LRNG_DFLT_DRNG_DRBG is not set
+# CONFIG_LRNG_DFLT_DRNG_KCAPI is not set
+
+# ------------------------------------------------------------
+# Gereksiz/Yük Yapan Özellikleri Kapatma (Gereksiz Bloat)
+# ------------------------------------------------------------
+# CONFIG_LRNG_AIS2031_NTG1_SEEDING_STRATEGY is not set
+# CONFIG_LRNG_RUNTIME_ES_CONFIG is not set
+# CONFIG_LRNG_SWITCH_HASH is not set
+# CONFIG_LRNG_SWITCH_DRNG is not set
+# CONFIG_LRNG_TESTING_MENU is not set
+# CONFIG_LRNG_SELFTEST is not set
+
